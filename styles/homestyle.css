@@ -39,22 +39,11 @@ body {
 }
 
 #mainhome-divb {
+    display: flex;
+    flex-direction: column;
     width: 80%;
-    align-items: flex-end;
+    align-items: center;
     margin-right: -90px;
+    height: 80vh;
+    justify-content: center;
 }
-#container {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden;
-  }
-  
-  .brick {
-    position: absolute;
-    width: 60px;
-    height: 30px;
-    background: url('brick-texture.jpg') no-repeat center center/cover;
-    border: 1px solid #b22222;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
-  }
