@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Steincrete</title>
+    <link rel="stylesheet" href="styles/mainstyle.css">
+    <link rel="stylesheet" href="styles/homestyle.css">
+
+</head>
+<body>
+    <nav>
+        <img src="imgs/steincretelogo.jpg" width="100px" class="nav-logo">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="aboutus.html">About us</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="contactus.html">Contact us</a></li>
+        </ul>
+    </nav>
+    <section id="mainhome">
+        <div>
+            <div id="mainhome-diva">
+                <img src="imgs/steincrete-logo-nobg.png" width="200px">
+                <h1>Cement</h1>
+                <h1>Products</h1>
+                <h1>For</h1>
+                <h1>Building</h1>
+                <h1>Civilizations</h1> 
+            </div>
+            <div id="mainhome-divb">
+                <img src="imgs/pileofcenemtbricks.png" width="70%">
+                <div id="container"></div>
+            </div>
+        </div>
+    </section>
+    <script>
+        const container = document.getElementById('container');
+
+function createBrick() {
+  const brick = document.createElement('div');
+  brick.className = 'brick';
+  
+  // Set random initial position
+  brick.style.left = Math.random() * window.innerWidth + 'px';
+  brick.style.top = '-50px';
+  
+  container.appendChild(brick);
+  
+  // Animate falling
+  let speed = Math.random() * 2 + 3; // Random fall speed
+  let y = -50; // Initial top position
+  const fallInterval = setInterval(() => {
+    y += speed;
+    brick.style.top = `${y}px`;
+    
+    // Stop falling when it reaches the bottom
+    if (y >= window.innerHeight - 30) {
+      clearInterval(fallInterval);
+      stackBrick(brick);
+    }
+  }, 16);
+}
+
+function stackBrick(brick) {
+  // Get current stack height at brick's position
+  const existingBricks = Array.from(container.children);
+  let maxY = window.innerHeight - 30; // Bottom of the screen
+  
+  existingBricks.forEach((b) => {
+    const bLeft = parseFloat(b.style.left);
+    const bTop = parseFloat(b.style.top);
+    const brickLeft = parseFloat(brick.style.left);
+    
+    // Check if bricks overlap horizontally
+    if (
+      brickLeft < bLeft + 60 &&
+      brickLeft + 60 > bLeft &&
+      bTop < maxY
+    ) {
+      maxY = bTop; // Stack on top of the brick below
+    }
+  });
+  
+  brick.style.top = `${maxY - 30}px`; // Adjust to stack
+}
+
+function startAnimation() {
+  setInterval(createBrick, 500); // Drop a brick every 500ms
+}
+
+startAnimation();
+    </script>
+</body>
+</html>
